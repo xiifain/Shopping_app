@@ -1,4 +1,4 @@
-# shopping_app
+# inventory_app
 
 A new Flutter project.
 
