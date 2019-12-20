@@ -1,28 +1,51 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import './main.dart';
+
 class AlDialog extends StatelessWidget {
   final String text;
 
-  AlDialog(this.text);
+  final Function setText;
+
+  AlDialog(this.text, this.setText);
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoAlertDialog(
-      content: Text(text),
-      title: Text("Title"),
-      actions: <Widget>[
-        CupertinoDialogAction(
-          child: Text("OK"),
-          onPressed: null,
+    return CupertinoApp(
+      home: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          backgroundColor: Colors.blue,
+          middle: Text(
+            "Dialog Page",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          previousPageTitle: 'Home',
+          automaticallyImplyLeading: true,
         ),
-        CupertinoDialogAction(
-          child: Text("Cancel"),
-          onPressed: null,
-        )
-      ],
+        child: CupertinoAlertDialog(
+          content: Text(text),
+          title: Text("Title"),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: Text("OK"),
+              onPressed: setText,
+            ),
+            CupertinoDialogAction(
+              child: Text("Cancel"),
+              onPressed: (){
+                Navigator.pop(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => Home()));  
+                print("Hey");
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
-
-
