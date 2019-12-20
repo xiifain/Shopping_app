@@ -13,17 +13,14 @@ class AlDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
+      title: 'Dialog Page',
       home: CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-          backgroundColor: Colors.blue,
           middle: Text(
             "Dialog Page",
-            style: TextStyle(
-              color: Colors.white,
-            ),
+            style: TextStyle(color: Colors.white),
           ),
-          previousPageTitle: 'Home',
-          automaticallyImplyLeading: true,
+          backgroundColor: Colors.blue,
         ),
         child: CupertinoAlertDialog(
           content: Text(text),
@@ -35,12 +32,12 @@ class AlDialog extends StatelessWidget {
             ),
             CupertinoDialogAction(
               child: Text("Cancel"),
-              onPressed: (){
+              onPressed: () {
                 Navigator.pop(
-                      context,
-                      CupertinoPageRoute(
-                          builder: (context) => Home()));  
-                print("Hey");
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => Home(),
+                    ));
               },
             ),
           ],

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -27,34 +29,47 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      home: CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          backgroundColor: Colors.blue,
-          middle: Title(
-            child: Text(
-              'Hey',
-              style: TextStyle(color: Colors.white),
+    return (Platform.isIOS)
+        ? CupertinoApp(
+            home: CupertinoPageScaffold(
+              navigationBar: CupertinoNavigationBar(
+                middle: Text(
+                  "Home",
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: Colors.blue,
+              ),
+              child: Center(
+                child: Builder(
+                  builder: (context) => CupertinoButton(
+                      child: Text('OK'),
+                      color: Colors.blue,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) =>
+                                    AlDialog(text, _setText)));
+                      }),
+                ),
+              ),
             ),
-            color: Colors.white,
-            title: 'Home',
-          ),
-          automaticallyImplyLeading: true,
-        ),
-        child: Center(
-          child: Builder(
-            builder: (context) => CupertinoButton(
-                child: Text('OK'),
-                color: Color.fromARGB(255, 105, 169, 229),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                          builder: (context) => AlDialog(text, _setText)));
-                }),
-          ),
-        ),
-      ),
-    );
+          )
+        : MaterialApp(
+            home: Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text(
+                  "Android",
+                  style: TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+                backgroundColor: Colors.blue,
+              ),
+              body: Center(
+                child: Text("Android"),
+              ),
+            ),
+          );
   }
 }
